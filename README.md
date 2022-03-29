@@ -2,12 +2,13 @@
 Take a look of my simple work with Data Camp
 
 ### Importing Data from Excel Files
-
+```
 #Load pandas as pd
-`import pandas as pd`
+import pandas as pd
 
 #Read spreadsheet and assign it to survey_responses
-`survey_responses = pd.read_excel('fcc_survey.xlsx')`
+survey_responses = pd.read_excel('fcc_survey.xlsx')
 
 #View the head of the dataframe
-`print(survey_responses.head())`
+print(survey_responses.head())
+```
