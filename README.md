@@ -34,7 +34,7 @@ print(survey_responses.columns)
 
 ____________________________
 
-> An Excel workbook may contain multiple sheets of related data. The New Developer Survey response workbook has sheets for different years. Because read_excel() loads only the first sheet by default, you've already gotten survey responses for 2016. Now, you'll create a dataframe of 2017 responses using read_excel()'s sheet_name argument in a couple different ways.
+> An Excel workbook may contain multiple sheets of related data. The New Developer Survey response workbook has sheets for different years. Because read_excel() loads only the first sheet by default, you've already gotten survey responses for 2016. Now, Create a dataframe of 2017 responses.
 
 ### Select a single sheet
 ```
@@ -49,4 +49,18 @@ responses_2017 = pd.read_excel("fcc_survey.xlsx",sheet_name=1)
 job_prefs = responses_2017.groupby("JobPref").JobPref.count()
 job_prefs.plot.barh()
 plt.show()
+```
+
+> Load both the 2016 and 2017 sheets
+
+```
+import pandas as pd
+all_survey_data = pd.read_excel("fcc_survey.xlsx",sheet_name=None)
+# all_survey_data = pd.read_excel("fcc_survey.xlsx",sheet_name=['2016','2017'])
+# all_survey_data = pd.read_excel("fcc_survey.xlsx", sheet_name=[0,'2017'])
+
+#  View the sheet names in all_survey_data
+print(all_survey_data.keys())
+# View the data type of all_survey_data
+print(type(all_survey_data))
 ```
