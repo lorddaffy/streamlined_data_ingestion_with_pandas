@@ -1,6 +1,8 @@
 # streamlined_data_ingestion_with_pandas
 ## Take a look of my simple work with Data Camp
 
+_________________________________________________________________
+### Working with Flat Files
 
 > The version of Vermont tax data here is a tab-separated values file (TSV),  Once the file has been loaded, You have to group the N1 field, which contains income range categories, to create a chart of tax returns by income category.
 ```
@@ -29,6 +31,60 @@ vt_data_next500 = pd.read_csv("vt_tax_data_2016.csv", nrows=500, skiprows=500,he
 # View the Vermont dataframes to confirm they're different
 print(vt_data_first500.head())
 print(vt_data_next500.head())
+```
+____________________________
+
+> Looking at the data dictionary for vt_tax_data_2016.csv reveals two such columns. The agi_stub column contains numbers that correspond to income categories, and zipcode has 5-digit values that should be strings -- treating them as integers means we lose leading 0s, which are meaningful. Let's specify the correct data type.
+```
+# Import pandas with the alias pd
+import pandas as pd
+
+# Create dict specifying data types for agi_stub and zipcode
+data_types = {"agi_stub": "category",
+			  "zipcode": str}
+
+# Load csv using dtype to set correct data types
+data = pd.read_csv("vt_tax_data_2016.csv", dtype=data_types)
+
+# Print data types of resulting frame
+print(data.dtypes.head())
+```
+____________________________
+
+> we can pass additional NA indicators with the na_values argument.
+```
+# Import pandas with the alias pd
+import pandas as pd
+
+#Create a dictionary, null_values, specifying that 0s in the zipcode column should be considered NA values.
+null_values = {"zipcode" : 0}
+
+# Load csv using na_values keyword argument
+data = pd.read_csv("vt_tax_data_2016.csv", 
+                   na_values=null_values)
+
+# View rows with NA ZIP codes
+print(data[data.zipcode.isna()])
+#print(data.zipcode.isna())
+```
+____________________________
+
+> Some lines in the Vermont tax data here are corrupted. In order to load the good lines, we need to tell pandas to skip errors.
+```
+# Import pandas with the alias pd
+import pandas as pd
+
+try:
+  # Set warn_bad_lines to issue warnings about bad records
+  data = pd.read_csv("vt_tax_data_2016_corrupt.csv", 
+                     error_bad_lines=False, 
+                     warn_bad_lines=True)
+  
+  # View first 5 records
+  print(data.head())
+  
+except pd.io.common.CParserError:
+    print("Your data contained rows that could not be parsed.")
 ```
 ____________________________
 
