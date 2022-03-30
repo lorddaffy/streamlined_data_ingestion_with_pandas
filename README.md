@@ -50,6 +50,8 @@ job_prefs = responses_2017.groupby("JobPref").JobPref.count()
 job_prefs.plot.barh()
 plt.show()
 ```
+____________________________
+### Work with Multiples sheets
 
 > Load both the 2016 and 2017 sheets
 
@@ -64,3 +66,24 @@ print(all_survey_data.keys())
 # View the data type of all_survey_data
 print(type(all_survey_data))
 ```
+
+> The FreeCodeCamp New Developer Survey file is set up similarly, with samples of responses from different years in different sheets, All sheets have been read into the ordered dictionary responses, where sheet names are keys and dataframes are values, Your task here is to compile them in one dataframe for analysis.
+```
+import pandas as pd
+# Create an empty dataframe
+all_responses = pd.DataFrame()
+
+# Set up for loop to iterate through values in responses
+for df in responses.values():
+  # Print the number of rows being added
+  print("Adding {} rows".format(df.shape[0]))
+  
+  # Append df to all_responses, assign result
+  all_responses = all_responses.append(df)
+
+# Graph employment statuses in sample
+counts = all_responses.groupby("EmploymentStatus").EmploymentStatus.count()
+counts.plot.barh()
+plt.show()
+```
+____________________________
