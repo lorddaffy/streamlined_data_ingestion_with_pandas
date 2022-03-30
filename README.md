@@ -1,5 +1,5 @@
 # streamlined_data_ingestion_with_pandas
-<span style="color:red">some *Take a look of my simple work with Data Camp* text</span>
+<span style="color: red;">*Take a look of my simple work with Data Camp*</span>
 
 
 > The version of Vermont tax data here is a tab-separated values file (TSV),  Once the file has been loaded, You have to group the N1 field, which contains income range categories, to create a chart of tax returns by income category.
