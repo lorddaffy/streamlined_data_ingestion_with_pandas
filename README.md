@@ -1,6 +1,22 @@
 # streamlined_data_ingestion_with_pandas
 Take a look of my simple work with Data Camp
 
+> The version of Vermont tax data here is a tab-separated values file (TSV),  Once the file has been loaded, You have to group the N1 field, which contains income range categories, to create a chart of tax returns by income category.
+```
+# Import pandas with the alias pd
+import pandas as pd
+
+# Load TSV using the sep keyword argument to set delimiter
+data = pd.read_csv('vt_tax_data_2016.tsv',sep='\t')
+print(data.head())
+# Plot the total number of tax returns by income group
+counts = data.groupby("agi_stub").N1.sum()
+print(counts)
+counts.plot.bar()
+plt.show()
+```
+____________________________
+
 ### Importing Data from Excel Files
 ```
 #Load pandas as pd
