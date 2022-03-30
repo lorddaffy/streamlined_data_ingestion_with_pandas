@@ -18,6 +18,20 @@ plt.show()
 ```
 ____________________________
 
+> When working with large files, it can be easier to load and process the data in pieces. Let's practice this workflow on the Vermont tax data.
+```
+# Import pandas with the alias pd
+import pandas as pd
+
+# Create dataframe of next 500 rows with labeled columns
+vt_data_next500 = pd.read_csv("vt_tax_data_2016.csv", nrows=500, skiprows=500,header=None,names=list(vt_data_first500))
+
+# View the Vermont dataframes to confirm they're different
+print(vt_data_first500.head())
+print(vt_data_next500.head())
+```
+____________________________
+
 ### Importing Data from Excel Files
 ```
 #Load pandas as pd
