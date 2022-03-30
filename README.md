@@ -67,7 +67,7 @@ print(all_survey_data.keys())
 print(type(all_survey_data))
 ```
 
-> The FreeCodeCamp New Developer Survey file is set up similarly, with samples of responses from different years in different sheets, All sheets have been read into the ordered dictionary responses, where sheet names are keys and dataframes are values, Your task here is to compile them in one dataframe for analysis.
+> The FreeCodeCamp New Developer Survey file is set up similarly, with samples of ***responses*** from different years in different sheets, All sheets have been read into the ordered dictionary responses, where sheet names are keys and dataframes are values, Your task here is to compile them in one dataframe for analysis.
 ```
 import pandas as pd
 # Create an empty dataframe
