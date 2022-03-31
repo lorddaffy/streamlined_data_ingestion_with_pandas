@@ -222,3 +222,21 @@ survey_data = pd.read_excel("fcc_survey_dts.xlsx",
 # View summary statistics about Part2Start
 print(survey_data.Part2Start.describe())
 ```
+____________________________
+
+> if a date is in a non-standard format, like 19991231 for December 31, 1999, it can't be parsed at the import stage, to convert it, passing in the column to convert and a string representing the date format used.
+
+```
+# Import pandas with the alias pd
+import pandas as pd
+
+# Load file, supplying the dict to parse_dates
+survey_data = pd.read_excel("fcc_survey_dts.xlsx")
+
+# Parse datetimes and assign result back to Part2EndTime
+survey_data["Part2EndTime"] = pd.to_datetime(survey_data["Part2EndTime"], 
+                                             format="%m%d%Y %H:%M:%S")
+
+# Print first few values of Part2EndTime
+print(survey_data.Part2EndTime.head())
+```
