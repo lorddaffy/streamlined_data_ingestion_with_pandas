@@ -304,3 +304,34 @@ data = response.json()
 cafes = pd.DataFrame(data["businesses"])
 print(cafes.head())
 ```
+____________________________
+
+> The categories attribute in the Yelp API response contains lists of objects. To flatten this data, you'll employ json_normalize() arguments to specify the path to categories and pick other attributes to include in the dataframe. You should also change the separator to facilitate column selection and prefix the other attributes to prevent column name collisions.
+
+```
+# Load json_normalize()
+# Import pandas with the alias pd
+import pandas as pd
+import requests
+from pandas.io.json import json_normalize
+
+api_url = "https://api.yelp.com/v3/businesses/search"
+
+# Create dictionary to query API for cafes in NYC
+parameters = {"term": "cafe",
+          	  "location": "NYC"}
+
+# Query the Yelp API with headers and params set
+response = requests.get(api_url, 
+                        headers=headers, 
+                        params=parameters)
+
+# Extract JSON data from response
+data = response.json()
+
+# Load other business attributes and set meta prefix
+flat_cafes = json_normalize(data["businesses"],sep="_",record_path="categories",meta=['name', 'alias', 'rating', ['coordinates', 'latitude'], ['coordinates', 'longitude']],meta_prefix='biz_') 
+                                                           
+# View the data
+print(flat_cafes.head())
+```
