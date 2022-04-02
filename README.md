@@ -1,6 +1,6 @@
 # streamlined_data_ingestion_with_pandas
 
-***Take a look of my simple work with Data Camp, Ingestion of data from flat files, Excel and Json***
+***Take a look of my simple work with Data Camp, Ingestion of data from flat files, Excel, Json and APIs***
 
 _________________________________________________________________
 ### Working with Flat Files
@@ -258,6 +258,7 @@ print(pop_in_shelters.describe())
 ```
 
 ____________________________
+
 > JSON isn't a tabular format, so pandas makes assumptions about its orientation when loading data. Most JSON data you encounter will be in orientations that pandas can automatically transform into a dataframe.
 ```
 # Import pandas with the alias pd
@@ -276,4 +277,30 @@ try:
     
 except ValueError:
     print("pandas could not parse the JSON.")
+```
+____________________________
+
+> The Yelp API requires the location parameter be set. It also lets users supply a term to search for. You'll use these parameters to get data about cafes in NYC, then process the result to create a dataframe.
+```
+# Import pandas with the alias pd
+import pandas as pd
+import requests
+
+api_url = "https://api.yelp.com/v3/businesses/search"
+
+# Create dictionary to query API for cafes in NYC
+parameters = {"term": "cafe",
+          	  "location": "NYC"}
+
+# Query the Yelp API with headers and params set
+response = requests.get(api_url, 
+                        headers=headers, 
+                        params=parameters)
+
+# Extract JSON data from response
+data = response.json()
+
+# Load "businesses" values to a data frame and print head
+cafes = pd.DataFrame(data["businesses"])
+print(cafes.head())
 ```
