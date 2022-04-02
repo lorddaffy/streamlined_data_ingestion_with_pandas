@@ -1,5 +1,6 @@
 # streamlined_data_ingestion_with_pandas
-## Take a look of my simple work with Data Camp
+
+***Take a look of my simple work with Data Camp, Ingestion of data from flat files, Excel and Json***
 
 _________________________________________________________________
 ### Working with Flat Files
@@ -239,4 +240,40 @@ survey_data["Part2EndTime"] = pd.to_datetime(survey_data["Part2EndTime"],
 
 # Print first few values of Part2EndTime
 print(survey_data.Part2EndTime.head())
+```
+____________________________
+
+### Working With Jsons 
+
+> Get a sense of the contents of dhs_daily_report.json
+```
+# Import pandas with the alias pd
+import pandas as pd
+
+# Load the daily report to a dataframe
+pop_in_shelters = pd.read_json('dhs_daily_report.json')
+
+# View summary stats about pop_in_shelters
+print(pop_in_shelters.describe())
+```
+
+____________________________
+> JSON isn't a tabular format, so pandas makes assumptions about its orientation when loading data. Most JSON data you encounter will be in orientations that pandas can automatically transform into a dataframe.
+```
+# Import pandas with the alias pd
+import pandas as pd
+
+try:
+    # Load the JSON with orient specified
+    df = pd.read_json("dhs_report_reformatted.json",
+                      orient='split')
+    
+    # Plot total population in shelters over time
+    df["date_of_census"] = pd.to_datetime(df["date_of_census"])
+    df.plot(x="date_of_census", 
+            y="total_individuals_in_shelter")
+    plt.show()
+    
+except ValueError:
+    print("pandas could not parse the JSON.")
 ```
