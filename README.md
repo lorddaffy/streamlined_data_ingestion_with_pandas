@@ -1,6 +1,6 @@
 # streamlined_data_ingestion_with_pandas
 
-***Take a look of my simple work with Data Camp, Ingestion of data from flat files, Excel, Json and APIs***
+**Take a look of my simple work with Data Camp, Ingestion of data from flat files, Excel, Json and APIs**
 
 _________________________________________________________________
 ### Working with Flat Files
